@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jitesh | Software Developer</title>
+  <meta name="description" content="Portfolio of Jitesh - Software Developer specializing in Java, Python, and Android development.">
+  <style>
+    /* ── Reset & Tokens ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --border: #2a2a3a;
+      --text: #e4e4ef;
+      --muted: #8888a0;
+      --accent: #6c63ff;
+      --accent-2: #ff6b6b;
+      --accent-3: #4ecdc4;
+      --gradient: linear-gradient(135deg, #6c63ff, #4ecdc4);
+      --shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Particle Canvas ── */
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: transform 0.3s;
+    }
+    nav.hidden { transform: translateY(-100%); }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gradient);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--text);
+      transition: 0.3s;
+    }
+
+    /* ── Sections ── */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section-title span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 48px;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+    .hero-content { max-width: 680px; }
+    .hero-greeting {
+      font-size: 16px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hero-name {
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero-name .gradient {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-tagline {
+      font-size: 20px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .typewriter {
+      font-size: 20px;
+      color: var(--accent-3);
+      font-weight: 600;
+      min-height: 30px;
+    }
+    .typewriter .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 22px;
+      background: var(--accent-3);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--gradient);
+      color: #fff;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(108,99,255,0.4); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 16px; font-size: 16px; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .stat-number {
+      font-size: 32px;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .skill-card:hover::before { transform: scaleX(1); }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .skill-icon { font-size: 28px; margin-bottom: 14px; }
+    .skill-card h3 { font-size: 18px; margin-bottom: 8px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .skill-tag {
+      padding: 4px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--accent-3);
+      font-weight: 500;
+    }
+
+    /* ── Projects ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: var(--shadow); }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .project-icon { font-size: 36px; }
+    .project-links { display: flex; gap: 10px; }
+    .project-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-size: 20px;
+    }
+    .project-links a:hover { color: var(--accent); }
+    .project-card h3 { font-size: 20px; margin-bottom: 10px; }
+    .project-card p { color: var(--muted); font-size: 14px; flex: 1; }
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .project-tech span {
+      padding: 4px 10px;
+      background: rgba(108,99,255,0.1);
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .project-stars {
+      color: var(--accent-2);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    /* ── Timeline (Experience) ── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+    .timeline-item:hover { border-color: var(--accent); transform: translateX(4px); }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -30px; top: 30px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+    }
+    .timeline-date {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .timeline-item h3 { font-size: 18px; margin-bottom: 4px; }
+    .timeline-item .company { color: var(--accent-3); font-size: 15px; margin-bottom: 10px; }
+    .timeline-item p { color: var(--muted); font-size: 14px; }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .contact-info h3 { font-size: 22px; margin-bottom: 16px; }
+    .contact-info p { color: var(--muted); margin-bottom: 24px; }
+    .contact-links { display: flex; flex-direction: column; gap: 16px; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 14px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: all 0.3s;
+      font-size: 15px;
+    }
+    .contact-link:hover { border-color: var(--accent); transform: translateX(6px); }
+    .contact-link .icon {
+      font-size: 22px;
+      width: 40px; height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(108,99,255,0.1);
+      border-radius: 8px;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── Scroll Animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(10,10,15,0.95);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: 20px 24px;
+        gap: 18px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Particle background -->
+<canvas id="particles"></canvas>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">J.</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-content reveal">
+    <div class="hero-greeting">Hello, World</div>
+    <h1 class="hero-name">I'm <span class="gradient">Jitesh</span></h1>
+    <p class="hero-tagline">Software Developer & Problem Solver</p>
+    <div class="typewriter" id="typewriter"><span class="cursor"></span></div>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://github.com/jitu2611" target="_blank" rel="noopener" class="btn btn-outline">GitHub Profile</a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <h2 class="section-title reveal"><span>About</span> Me</h2>
+  <p class="section-subtitle reveal">A bit about who I am and what I do.</p>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I'm Jitesh, a software developer who has been building things since 2016. I enjoy
+        working across the full stack -- from crafting Android apps with Java, to designing
+        system architectures in Python, to wrangling frontends in HTML and JavaScript.
+      </p>
+      <p>
+        I care about writing clean, maintainable code and solving real problems. Whether
+        it is a celestial navigation calculator, a hotel rating system, or a speed-dial app,
+        I like building tools that people actually use.
+      </p>
+      <p>
+        When I am not coding, you will find me tinkering with open-source projects,
+        exploring low-level design patterns, or figuring out how to make the next thing work.
+      </p>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-number" data-target="13">0</div>
+        <div class="stat-label">Public Repos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="9">0</div>
+        <div class="stat-label">Years Coding</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="5">0</div>
+        <div class="stat-label">Languages</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="100">0</div>
+        <div class="stat-label">% Passion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <h2 class="section-title reveal"><span>Skills</span> & Expertise</h2>
+  <p class="section-subtitle reveal">Technologies and tools I work with.</p>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#9749;</div>
+      <h3>Backend & Systems</h3>
+      <p style="color:var(--muted); font-size:14px;">Building robust server-side applications and system-level tools.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Firebase</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#128241;</div>
+      <h3>Mobile Development</h3>
+      <p style="color:var(--muted); font-size:14px;">Native Android apps with clean architecture and smooth UX.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Android</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Firebase</span>
+        <span class="skill-tag">Material Design</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#127760;</div>
+      <h3>Web & Frontend</h3>
+      <p style="color:var(--muted); font-size:14px;">Interactive web applications with modern HTML, CSS, and JavaScript.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Three.js</span>
+        <span class="skill-tag">Globe.gl</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#128736;</div>
+      <h3>Tools & DevOps</h3>
+      <p style="color:var(--muted); font-size:14px;">Version control, monitoring, and deployment pipelines.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Linux</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <h2 class="section-title reveal"><span>Featured</span> Projects</h2>
+  <p class="section-subtitle reveal">A selection of things I have built.</p>
+  <div class="projects-grid" id="projectsGrid">
+    <!-- Populated by JS -->
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h2 class="section-title reveal"><span>Get In</span> Touch</h2>
+  <p class="section-subtitle reveal">Have a question or want to work together? Reach out.</p>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Let's connect</h3>
+      <p>
+        I'm always open to discussing new projects, creative ideas, or opportunities
+        to be part of something interesting.
+      </p>
+      <div class="contact-links">
+        <a href="https://github.com/jitu2611" target="_blank" rel="noopener" class="contact-link">
+          <div class="icon">&#128187;</div>
+          <div>
+            <div style="font-weight:600;">GitHub</div>
+            <div style="color:var(--muted); font-size:13px;">github.com/jitu2611</div>
+          </div>
+        </a>
+        <a href="mailto:jitesh@example.com" class="contact-link">
+          <div class="icon">&#9993;</div>
+          <div>
+            <div style="font-weight:600;">Email</div>
+            <div style="color:var(--muted); font-size:13px;">Drop me a line</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>Built with care by Jitesh &mdash; <a href="https://github.com/jitu2611" target="_blank" rel="noopener">@jitu2611</a></p>
+</footer>
+
+<script>
+/* ── Particle Background ── */
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+  const COUNT = 60;
+  const MAX_DIST = 120;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 2 + 1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = w;
+      if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h;
+      if (p.y > h) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(108,99,255,0.5)';
+      ctx.fill();
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = 'rgba(108,99,255,' + (1 - dist / MAX_DIST) * 0.15 + ')';
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── Typewriter ── */
+(function() {
+  const phrases = [
+    'Building Android Apps',
+    'Designing System Architecture',
+    'Exploring Celestial Navigation',
+    'Writing Clean Code',
+    'Solving Real Problems'
+  ];
+  const el = document.getElementById('typewriter');
+  let phraseIdx = 0, charIdx = 0, deleting = false;
+  function type() {
+    const current = phrases[phraseIdx];
+    if (deleting) {
+      charIdx--;
+    } else {
+      charIdx++;
+    }
+    el.innerHTML = current.substring(0, charIdx) + '<span class="cursor"></span>';
+    if (!deleting && charIdx === current.length) {
+      setTimeout(function() { deleting = true; type(); }, 2000);
+      return;
+    }
+    if (deleting && charIdx === 0) {
+      deleting = false;
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+    }
+    setTimeout(type, deleting ? 40 : 80);
+  }
+  type();
+})();
+
+/* ── Scroll Reveal ── */
+(function() {
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+
+/* ── Counter Animation ── */
+(function() {
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'));
+        let current = 0;
+        const step = Math.max(1, Math.floor(target / 40));
+        const timer = setInterval(function() {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = current + (el.closest('.stat-card').querySelector('.stat-label').textContent.includes('%') ? '%' : '+');
+        }, 30);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(function(c) { observer.observe(c); });
+})();
+
+/* ── Nav Scroll ── */
+(function() {
+  let lastScroll = 0;
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    const cur = window.scrollY;
+    if (cur > lastScroll && cur > 100) {
+      nav.classList.add('hidden');
+    } else {
+      nav.classList.remove('hidden');
+    }
+    lastScroll = cur;
+  });
+})();
+
+/* ── Hamburger ── */
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+/* ── Projects ── */
+(function() {
+  const projects = [
+    {
+      name: 'Astro-Navigation',
+      desc: 'A full-featured celestial navigation suite with sight reduction, SR tables, dead reckoning, and interactive 3D globe plotting. Built for real offshore navigation training.',
+      url: 'https://github.com/jitu2611/Astro-Navigation',
+      lang: 'JavaScript',
+      tech: ['JavaScript', 'Three.js', 'Globe.gl', 'Astronomy'],
+      icon: '&#127776;',
+      stars: 0
+    },
+    {
+      name: 'Filmstack',
+      desc: 'An Android movie discovery app powered by Firebase, letting users browse, search, and save their favorite films with a polished Material Design interface.',
+      url: 'https://github.com/jitu2611/Filmstack',
+      lang: 'Java',
+      tech: ['Java', 'Android', 'Firebase'],
+      icon: '&#127909;',
+      stars: 1
+    },
+    {
+      name: 'LLD_Hotel_Rating',
+      desc: 'A low-level design exercise implementing a hotel rating system in Python -- clean OOP, SOLID principles, and clear separation of concerns.',
+      url: 'https://github.com/jitu2611/LLD_Hotel_Rating',
+      lang: 'Python',
+      tech: ['Python', 'OOP', 'LLD'],
+      icon: '&#127976;',
+      stars: 0
+    },
+    {
+      name: 'LLD_School',
+      desc: 'Low-level design of a school management system in Python, demonstrating design patterns and scalable architecture for real-world domain modelling.',
+      url: 'https://github.com/jitu2611/LLD_school',
+      lang: 'Python',
+      tech: ['Python', 'OOP', 'Design Patterns'],
+      icon: '&#127891;',
+      stars: 0
+    },
+    {
+      name: 'Speed-Dial APK',
+      desc: 'A one-touch dial Android app for quickly calling your most-used contacts. Focused on simplicity and speed.',
+      url: 'https://github.com/jitu2611/Speed-Dial-apk',
+      lang: 'Java',
+      tech: ['Java', 'Android'],
+      icon: '&#128222;',
+      stars: 0
+    },
+    {
+      name: 'Quick-In',
+      desc: 'An Android utility app built in Java for fast, frictionless task entry and organization.',
+      url: 'https://github.com/jitu2611/Quick-In',
+      lang: 'Java',
+      tech: ['Java', 'Android'],
+      icon: '&#9889;',
+      stars: 0
+    }
+  ];
+
+  const grid = document.getElementById('projectsGrid');
+  projects.forEach(function(p) {
+    const card = document.createElement('div');
+    card.className = 'project-card reveal';
+    card.innerHTML =
+      '<div class="project-header">' +
+        '<div class="project-icon">' + p.icon + '</div>' +
+        '<div class="project-links"><a href="' + p.url + '" target="_blank" rel="noopener" title="View on GitHub">&#128279;</a></div>' +
+      '</div>' +
+      '<h3>' + p.name + '</h3>' +
+      '<p>' + p.desc + '</p>' +
+      '<div class="project-tech">' + p.tech.map(function(t) { return '<span>' + t + '</span>'; }).join('') + '</div>' +
+      (p.stars > 0 ? '<div class="project-stars">&#11088; ' + p.stars + ' star' + (p.stars > 1 ? 's' : '') + '</div>' : '');
+    grid.appendChild(card);
+  });
+
+  // Re-observe new reveal elements
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  grid.querySelectorAll('.reveal').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+
+/* ── Contact Form (placeholder) ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector('button');
+  btn.textContent = 'Sent!';
+  btn.style.background = '#16a34a';
+  setTimeout(function() {
+    btn.textContent = 'Send Message';
+    btn.style.background = '';
+    e.target.reset();
+  }, 2000);
+}
+</script>
+</body>
+</html>
