@@ -7,28 +7,29 @@
   <meta name="description" content="Portfolio of Jitesh — Software Developer specializing in AI engineering, Python, and Android development.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #080808;
-      --surface:   #0f0f12;
-      --surface-2: #16161c;
-      --border:    #1e1e26;
-      --border-2:  #2a2a38;
-      --text:      #ededf0;
-      --muted:     #5a5a6e;
-      --accent:    #d4ff00;
-      --accent-2:  #ff4060;
-      --accent-3:  #00c8ff;
+      --bg:        #060912;
+      --surface:   #0b0f1e;
+      --surface-2: #111627;
+      --border:    #1a2035;
+      --border-2:  #232d47;
+      --text:      #e8eaf2;
+      --muted:     #4d5675;
+      --accent:    #0070f3;
+      --accent-glow: rgba(0,112,243,0.25);
+      --accent-2:  #3b82f6;
+      --accent-3:  #60a5fa;
       --shadow:    0 16px 64px rgba(0,0,0,0.7);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -67,7 +68,7 @@
     nav.hidden { transform: translateY(-100%); }
 
     .nav-logo {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 800;
       font-size: 22px;
       color: var(--accent);
@@ -80,7 +81,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 12px;
       color: var(--muted);
       text-decoration: none;
@@ -108,7 +109,7 @@
       padding: 120px 40px;
     }
     .section-label {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 11px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -127,7 +128,7 @@
       opacity: 0.4;
     }
     .section-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(36px, 5vw, 56px);
       font-weight: 800;
       line-height: 1.05;
@@ -155,7 +156,7 @@
       position: relative;
     }
     .hero-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 12px;
       letter-spacing: 0.25em;
       text-transform: uppercase;
@@ -174,7 +175,7 @@
       background: var(--accent);
     }
     .hero-name {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(64px, 11vw, 140px);
       font-weight: 800;
       line-height: 0.9;
@@ -184,7 +185,7 @@
       animation: fadeUp 0.8s 0.25s forwards;
     }
     .hero-name .outline {
-      -webkit-text-stroke: 2px var(--text);
+      -webkit-text-stroke: 2px rgba(232,234,242,0.25);
       color: transparent;
     }
     .hero-name .accent { color: var(--accent); }
@@ -208,16 +209,16 @@
       font-weight: 500;
     }
     .typewriter-wrap {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 14px;
-      color: var(--accent-3);
+      color: var(--accent-2);
       margin-top: 12px;
     }
     .cursor-blink {
       display: inline-block;
       width: 8px;
       height: 14px;
-      background: var(--accent-3);
+      background: var(--accent-2);
       vertical-align: text-bottom;
       animation: blink 1s step-end infinite;
     }
@@ -241,9 +242,9 @@
     }
     .btn-accent {
       background: var(--accent);
-      color: #000;
+      color: #fff;
     }
-    .btn-accent:hover { background: #e8ff33; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,255,0,0.25); }
+    .btn-accent:hover { background: #1a7fff; transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
     .btn-ghost {
       background: transparent;
       color: var(--text);
@@ -257,7 +258,7 @@
       right: -20px;
       top: 50%;
       transform: translateY(-50%);
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(180px, 25vw, 340px);
       font-weight: 800;
       color: transparent;
@@ -301,7 +302,7 @@
     }
     .stat-item:hover { background: var(--surface-2); }
     .stat-num {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 48px;
       font-weight: 800;
       color: var(--accent);
@@ -314,7 +315,7 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-top: 6px;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
     }
 
     /* ── Skills ── */
@@ -353,7 +354,7 @@
       display: block;
     }
     .skill-card h3 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 17px;
       font-weight: 700;
       margin-bottom: 8px;
@@ -367,7 +368,7 @@
     }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 11px;
       padding: 3px 10px;
       border: 1px solid var(--border-2);
@@ -397,11 +398,11 @@
       justify-content: space-between;
     }
     .feat-badge {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #000;
+      color: #fff;
       background: var(--accent);
       padding: 4px 10px;
       border-radius: 3px;
@@ -409,7 +410,7 @@
       margin-bottom: 20px;
     }
     .feat-body h3 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 32px;
       font-weight: 800;
       letter-spacing: -1px;
@@ -441,7 +442,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, rgba(212,255,0,0.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(0,112,243,0.12) 0%, transparent 70%);
     }
 
     .projects-grid {
@@ -471,7 +472,7 @@
     .proj-icon { font-size: 28px; }
     .proj-links { display: flex; gap: 10px; align-items: center; }
     .proj-links a {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 11px;
       color: var(--muted);
       text-decoration: none;
@@ -483,7 +484,7 @@
     .proj-links a:hover { color: var(--accent); border-color: var(--accent); }
     .proj-links a.live { color: var(--accent); border-color: rgba(212,255,0,0.3); }
     .proj-card h3 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 18px;
       font-weight: 700;
       margin-bottom: 8px;
@@ -498,16 +499,16 @@
     }
     .proj-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
     .proj-tech span {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 10px;
       padding: 2px 8px;
-      background: rgba(212,255,0,0.06);
-      border: 1px solid rgba(212,255,0,0.15);
+      background: rgba(0,112,243,0.08);
+      border: 1px solid rgba(0,112,243,0.2);
       border-radius: 3px;
-      color: var(--accent);
+      color: var(--accent-3);
     }
     .stars {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 11px;
       color: var(--accent-2);
       margin-top: 10px;
@@ -522,7 +523,7 @@
       align-items: start;
     }
     .contact-left h3 {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 28px;
       font-weight: 800;
       margin-bottom: 12px;
@@ -588,7 +589,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 12px;
       color: var(--muted);
     }
