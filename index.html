@@ -510,22 +510,22 @@
     <div class="about-text reveal">
       <p>
         I'm Jitesh, a software developer who has been building things since 2016. I enjoy
-        working across the full stack -- from crafting Android apps with Java, to designing
-        system architectures in Python, to wrangling frontends in HTML and JavaScript.
+        working across the full stack — from crafting Android apps with Java, to designing
+        system architectures in Python, to shipping AI-powered products with FastAPI and LLMs.
       </p>
       <p>
-        I care about writing clean, maintainable code and solving real problems. Whether
-        it is a celestial navigation calculator, a hotel rating system, or a speed-dial app,
-        I like building tools that people actually use.
+        Recently I've been deep in the AI space: building RAG pipelines, autonomous agents,
+        and multi-model LLM applications. Whether it's a document Q&A tool, a stock analyst
+        agent, or a celestial navigation suite, I like building things that solve real problems.
       </p>
       <p>
-        When I am not coding, you will find me tinkering with open-source projects,
-        exploring low-level design patterns, or figuring out how to make the next thing work.
+        When I'm not coding, you'll find me exploring new AI capabilities, tinkering with
+        open-source projects, or figuring out how to make the next idea actually ship.
       </p>
     </div>
     <div class="stats-grid reveal">
       <div class="stat-card">
-        <div class="stat-number" data-target="13">0</div>
+        <div class="stat-number" data-target="16">0</div>
         <div class="stat-label">Public Repos</div>
       </div>
       <div class="stat-card">
@@ -591,6 +591,19 @@
         <span class="skill-tag">GitHub</span>
         <span class="skill-tag">Prometheus</span>
         <span class="skill-tag">Linux</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">&#129302;</div>
+      <h3>AI & LLM Engineering</h3>
+      <p style="color:var(--muted); font-size:14px;">Building intelligent applications with large language models and RAG pipelines.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Claude AI</span>
+        <span class="skill-tag">OpenRouter</span>
+        <span class="skill-tag">FastAPI</span>
+        <span class="skill-tag">RAG</span>
+        <span class="skill-tag">LLM Agents</span>
+        <span class="skill-tag">Vercel</span>
       </div>
     </div>
   </div>
@@ -710,11 +723,12 @@
 /* ── Typewriter ── */
 (function() {
   const phrases = [
-    'Building Android Apps',
+    'Building AI-Powered Applications',
+    'Shipping RAG Pipelines',
+    'Engineering LLM Agents',
     'Designing System Architecture',
-    'Exploring Celestial Navigation',
-    'Writing Clean Code',
-    'Solving Real Problems'
+    'Building Android Apps',
+    'Writing Clean Code'
   ];
   const el = document.getElementById('typewriter');
   let phraseIdx = 0, charIdx = 0, deleting = false;
@@ -805,6 +819,37 @@ document.querySelectorAll('.nav-links a').forEach(function(a) {
 (function() {
   const projects = [
     {
+      name: 'AI Doc Q&A',
+      desc: 'A production RAG application that lets you upload PDFs and ask questions using Claude 3.5 Sonnet or GPT-4o via OpenRouter. Features TF-IDF semantic search, multi-provider AI support, and a modern chat UI deployed on Vercel.',
+      url: 'https://github.com/jitu2611/ai-doc-qa',
+      demo: 'https://ai-doc-qa.vercel.app',
+      lang: 'Python',
+      tech: ['Python', 'FastAPI', 'RAG', 'Claude AI', 'OpenRouter', 'Vercel'],
+      icon: '&#129302;',
+      stars: 0,
+      badge: 'NEW'
+    },
+    {
+      name: 'Indian Stock Analyst',
+      desc: 'A Claude AI skill that transforms your Zerodha/Groww portfolio CSV into a professional Buy/Hold/Avoid report in seconds — powered by live news sentiment and multi-model LLM analysis.',
+      url: 'https://github.com/jitu2611/indian-stock-analyst',
+      lang: 'Python',
+      tech: ['Python', 'Claude AI', 'LLM', 'Finance', 'Sentiment Analysis'],
+      icon: '&#128200;',
+      stars: 3,
+      badge: 'NEW'
+    },
+    {
+      name: 'Insight Pulse Agent',
+      desc: 'Autonomous AI news agent with multi-model LLM orchestration, custom digital personas, and a premium Rich CLI. Fetches, analyses, and dispatches personalised news briefings automatically.',
+      url: 'https://github.com/jitu2611/insight-pulse-agent',
+      lang: 'Python',
+      tech: ['Python', 'LLM Agents', 'Multi-model', 'CLI', 'Automation'],
+      icon: '&#128240;',
+      stars: 0,
+      badge: 'NEW'
+    },
+    {
       name: 'Astro-Navigation',
       desc: 'A full-featured celestial navigation suite with sight reduction, SR tables, dead reckoning, and interactive 3D globe plotting. Built for real offshore navigation training.',
       url: 'https://github.com/jitu2611/Astro-Navigation',
@@ -866,8 +911,11 @@ document.querySelectorAll('.nav-links a').forEach(function(a) {
     card.className = 'project-card reveal';
     card.innerHTML =
       '<div class="project-header">' +
-        '<div class="project-icon">' + p.icon + '</div>' +
-        '<div class="project-links"><a href="' + p.url + '" target="_blank" rel="noopener" title="View on GitHub">&#128279;</a></div>' +
+        '<div class="project-icon">' + p.icon + (p.badge ? ' <span style="font-size:11px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:10px;vertical-align:middle;font-family:inherit;font-weight:700;">' + p.badge + '</span>' : '') + '</div>' +
+        '<div class="project-links">' +
+          (p.demo ? '<a href="' + p.demo + '" target="_blank" rel="noopener" title="Live Demo" style="font-size:13px;padding:4px 10px;background:rgba(108,99,255,0.15);border-radius:6px;color:var(--accent);">Live</a>' : '') +
+          '<a href="' + p.url + '" target="_blank" rel="noopener" title="View on GitHub">&#128279;</a>' +
+        '</div>' +
       '</div>' +
       '<h3>' + p.name + '</h3>' +
       '<p>' + p.desc + '</p>' +
