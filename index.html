@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jitesh | Software Developer</title>
-  <meta name="description" content="Portfolio of Jitesh — Software Developer specializing in AI engineering, Python, and Android development.">
+  <title>Jitesh | AI Engineering · Backend · Vibe-Coded Frontends</title>
+  <meta name="description" content="Jitesh — 8+ years of backend engineering experience, now building AI agents, RAG applications, evaluation tools, and vibe-coded frontends.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -650,8 +650,13 @@
     ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
   </style>
+  <link rel="stylesheet" href="studio.css">
+  <link rel="stylesheet" href="universe.css">
+  <script src="studio.js" defer></script>
+  <script src="universe.js" defer></script>
 </head>
 <body>
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <!-- Navigation -->
 <nav id="navbar">
@@ -670,18 +675,33 @@
 <!-- Hero -->
 <section id="hero">
   <div class="hero-inner">
-    <div class="hero-deco" aria-hidden="true">J</div>
-    <div class="hero-eyebrow">Available for opportunities</div>
+    <div class="orbital" aria-hidden="true"><div class="orbit"></div><div class="orbit"></div><div class="orbit"></div>
+      <svg class="robot" viewBox="0 0 320 380" fill="none">
+        <defs><linearGradient id="shell" x1="65" y1="80" x2="270" y2="320" gradientUnits="userSpaceOnUse"><stop stop-color="#faf9ed"/><stop offset=".45" stop-color="#b9b8cc"/><stop offset="1" stop-color="#55546b"/></linearGradient><linearGradient id="visor" x2="1" y2="1"><stop stop-color="#101b22"/><stop offset="1" stop-color="#25213c"/></linearGradient></defs>
+        <ellipse cx="160" cy="353" rx="65" ry="9" fill="#d8fa73" opacity=".12"/>
+        <g class="robot-body"><path d="M160 67V40" stroke="#b7a3f5" stroke-width="5"/><circle class="antenna-light" cx="160" cy="32" r="9" fill="#d8fa73"/>
+        <rect x="51" y="113" width="25" height="63" rx="12" fill="#b7a3f5"/><rect x="244" y="113" width="25" height="63" rx="12" fill="#b7a3f5"/>
+        <rect x="67" y="72" width="186" height="146" rx="52" fill="url(#shell)" stroke="#f4f0ff" stroke-width="2"/>
+        <rect x="84" y="99" width="152" height="91" rx="33" fill="url(#visor)" stroke="#77728b"/>
+        <g class="robot-eyes" fill="#d8fa73"><rect x="109" y="123" width="25" height="31" rx="12"/><rect x="186" y="123" width="25" height="31" rx="12"/></g>
+        <path d="M147 168Q160 177 173 168" stroke="#d8fa73" stroke-width="3" stroke-linecap="round"/>
+        <path d="M114 233Q160 215 206 233L218 277Q219 310 160 326Q101 310 102 277Z" fill="url(#shell)" stroke="#ddd9ed" stroke-width="2"/>
+        <circle cx="160" cy="268" r="23" fill="#181e20" stroke="#77728b"/><path class="core-glyph" d="M160 251L170 268L160 285L150 268Z" fill="#d8fa73"/>
+        <path d="M90 240Q60 252 72 284" stroke="#b7a3f5" stroke-width="20" stroke-linecap="round"/><path class="robot-hand" d="M230 242Q266 228 265 198" stroke="#b7a3f5" stroke-width="20" stroke-linecap="round"/>
+        </g>
+      </svg><span class="orbital-label">J / 01 — YOUR FRIENDLY DIGITAL EXPLORER</span></div>
+    <div class="hero-eyebrow">Backend engineer. AI builder. Creative coder.</div>
     <h1 class="hero-name">
-      I'm<br>
-      <span class="accent">Jitesh</span><br>
-      <span class="outline">Dev.</span>
+      Jitesh<span class="accent">.</span><br>
+      <span class="outline">AI meets</span><br>
+      engineering.
     </h1>
     <div class="hero-row">
       <div>
         <p class="hero-tagline">
-          <span class="highlight">Software developer</span> building AI-powered tools,
-          Android apps, and backend systems since <span class="highlight">2016</span>.
+          <span class="highlight">8+ years of backend engineering.</span>
+          Now building agentic AI, RAG applications, and intelligent developer tools —
+          with <span class="highlight">vibe-coded frontends</span> that bring them to life.
         </p>
         <div class="typewriter-wrap" id="typewriter"><span class="cursor-blink"></span></div>
       </div>
@@ -693,44 +713,58 @@
   </div>
 </section>
 
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Agentic AI <b>✳</b> Backend engineering <b>✳</b> Vibe-coded frontends <b>✳</b></span><span>Agentic AI <b>✳</b> Backend engineering <b>✳</b> Vibe-coded frontends <b>✳</b></span></div></div>
+
+<section id="universe" aria-labelledby="universe-title">
+  <div class="universe-heading"><div><div class="section-label">Beyond the interface</div><h2 class="section-title" id="universe-title">A little artificial.<br>A lot of possibility.</h2></div><p>An experimental corner of my universe. Explore the signals behind intelligent systems.</p></div>
+  <div class="universe-console" data-mode="neural">
+    <canvas id="neural-space" aria-hidden="true"></canvas>
+    <div class="console-top"><span><i></i> J / 01 · INTERACTIVE SYSTEM</span><span>SIMULATION / NOT LIVE AI</span></div>
+    <div class="core-orb" aria-hidden="true"><div></div><div></div><div></div><span>J<span class="core-dot">.</span></span></div>
+    <div class="console-readout"><span class="readout-label">01 / NEURAL NETWORK</span><h3 id="mode-title">Everything is connected.</h3><p id="mode-description">Individual signals. Shared intelligence. A visual study of the connections that make complex systems possible.</p></div>
+    <div class="mode-controls" role="group" aria-label="Universe visual mode"><button type="button" data-mode="neural" aria-pressed="true">01 Neural</button><button type="button" data-mode="orbit" aria-pressed="false">02 Orbital</button><button type="button" data-mode="signal" aria-pressed="false">03 Signal</button></div>
+    <div class="console-coordinate" aria-hidden="true">EXPLORE THE SPACE<br>MOVE YOUR POINTER ↗</div>
+  </div>
+</section>
+
 <!-- About -->
 <section id="about">
   <div class="section-label reveal">01 — About</div>
-  <h2 class="section-title reveal">Building things<br>that matter.</h2>
+  <h2 class="section-title reveal">Backend depth.<br>AI-first direction.</h2>
   <div class="about-layout">
     <div class="about-text reveal reveal-delay-1">
       <p>
-        I'm Jitesh, a software developer who has been building things since <span>2016</span>.
-        I work across the stack — from crafting <span>Android apps</span> in Java, to designing
-        system architectures in Python, to shipping <span>AI-powered products</span> with FastAPI and LLMs.
+        I'm Jitesh — a backend engineer with <span>8+ years of experience</span>.
+        My foundation is server-side engineering: <span>Java, Python, APIs, and system design</span>.
+        My current focus is bringing that engineering discipline to AI-powered products.
       </p>
       <p>
-        Recently I've been deep in the <span>AI engineering</span> space: building RAG pipelines,
-        autonomous agents, and multi-model applications. I enjoy the full journey from idea
-        to deployed product.
+        I'm building across the <span>AI application stack</span>: multi-agent research workflows,
+        retrieval-augmented generation, prompt evaluation, and coding-agent observability.
+        I care about what surrounds the model — <span>clear boundaries, evidence, evaluation, and control</span>.
       </p>
       <p>
-        I care about writing <span>clean, maintainable code</span> and solving real problems.
-        Whether it's a document Q&A tool, a stock analyst agent, or a celestial
-        navigation suite — I like building things that actually ship.
+        On the frontend, I <span>vibe code with AI</span> to move quickly from an idea to an expressive,
+        usable interface. AI helps accelerate the build; <span>engineering judgment, review, and iteration</span>
+        shape the result. Backend depth, AI-first thinking, and a hands-on product mindset.
       </p>
     </div>
     <div class="stats-wrap reveal reveal-delay-2">
       <div class="stat-item">
-        <div class="stat-num" data-target="16">0</div>
-        <div class="stat-lbl">Public Repos</div>
+        <div class="stat-num">AI</div>
+        <div class="stat-lbl">Primary focus</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" data-target="9">0</div>
-        <div class="stat-lbl">Years Coding</div>
+        <div class="stat-num">8+</div>
+        <div class="stat-lbl">Years in backend</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" data-target="5">0</div>
-        <div class="stat-lbl">Languages</div>
+        <div class="stat-num">0→1</div>
+        <div class="stat-lbl">Product mindset</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" data-target="100">0</div>
-        <div class="stat-lbl">% Passion</div>
+        <div class="stat-num">+AI</div>
+        <div class="stat-lbl">Vibe-coded frontend</div>
       </div>
     </div>
   </div>
@@ -739,46 +773,42 @@
 <!-- Skills -->
 <section id="skills">
   <div class="section-label reveal">02 — Skills</div>
-  <h2 class="section-title reveal">What I work with.</h2>
-  <p class="section-sub reveal">Technologies and tools across the stack.</p>
+  <h2 class="section-title reveal">The AI builder’s stack.</h2>
+  <p class="section-sub reveal">AI at the center. Backend engineering underneath. Expressive interfaces on top.</p>
   <div class="skills-grid">
     <div class="skill-card reveal">
       <span class="skill-icon">&#9749;</span>
-      <h3>Backend & Systems</h3>
-      <p>Robust server-side applications and system-level tools.</p>
+      <h3>AI & Agentic Systems</h3>
+      <p>Multi-agent research, tool-connected workflows, and retrieval-grounded applications.</p>
       <div class="tags">
-        <span class="tag">Java</span>
-        <span class="tag">Python</span>
-        <span class="tag">REST APIs</span>
-        <span class="tag">Firebase</span>
+        <span class="tag">LLM Agents</span><span class="tag">RAG</span>
+        <span class="tag">Claude</span><span class="tag">MCP</span><span class="tag">Pi SDK</span>
       </div>
     </div>
     <div class="skill-card reveal reveal-delay-1">
       <span class="skill-icon">&#128241;</span>
-      <h3>Mobile Development</h3>
-      <p>Native Android apps with clean architecture and smooth UX.</p>
+      <h3>Backend Engineering</h3>
+      <p>8+ years of experience building server-side software, APIs, and application architecture.</p>
       <div class="tags">
-        <span class="tag">Android</span>
-        <span class="tag">Java</span>
-        <span class="tag">Firebase</span>
-        <span class="tag">Material Design</span>
+        <span class="tag">Java</span><span class="tag">Python</span>
+        <span class="tag">Spring Boot</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span>
       </div>
     </div>
     <div class="skill-card reveal reveal-delay-2">
       <span class="skill-icon">&#127760;</span>
-      <h3>Web & Frontend</h3>
-      <p>Interactive web applications with modern HTML, CSS, and JavaScript.</p>
+      <h3>Vibe-Coded Frontends</h3>
+      <p>AI-assisted prototyping, hands-on refinement, and expressive interfaces for technical products.</p>
       <div class="tags">
         <span class="tag">HTML/CSS</span>
         <span class="tag">JavaScript</span>
-        <span class="tag">Three.js</span>
-        <span class="tag">Globe.gl</span>
+        <span class="tag">Next.js</span><span class="tag">TypeScript</span>
+        <span class="tag">AI-assisted development</span>
       </div>
     </div>
     <div class="skill-card reveal">
       <span class="skill-icon">&#128736;</span>
-      <h3>Tools & DevOps</h3>
-      <p>Version control, monitoring, and deployment pipelines.</p>
+      <h3>Engineering Workflow</h3>
+      <p>Version control, local-first development, testing, and repeatable builds.</p>
       <div class="tags">
         <span class="tag">Git</span>
         <span class="tag">GitHub</span>
@@ -789,14 +819,11 @@
     </div>
     <div class="skill-card reveal reveal-delay-1">
       <span class="skill-icon">&#129302;</span>
-      <h3>AI & LLM Engineering</h3>
-      <p>Intelligent applications with large language models and RAG pipelines.</p>
+      <h3>Evaluation & Trust</h3>
+      <p>Prompt versioning and deterministic evaluations, with agent observability as an active area of exploration.</p>
       <div class="tags">
-        <span class="tag">Claude AI</span>
-        <span class="tag">OpenRouter</span>
-        <span class="tag">FastAPI</span>
-        <span class="tag">RAG</span>
-        <span class="tag">LLM Agents</span>
+        <span class="tag">Prompt evaluation</span><span class="tag">Test datasets</span>
+        <span class="tag">Risk controls</span><span class="tag">Execution traces</span>
       </div>
     </div>
   </div>
@@ -805,33 +832,34 @@
 <!-- Projects -->
 <section id="projects">
   <div class="section-label reveal">03 — Projects</div>
-  <h2 class="section-title reveal">Things I've built.</h2>
-  <p class="section-sub reveal">A selection of recent and notable work.</p>
+  <h2 class="section-title reveal">Intelligence, built.</h2>
+  <p class="section-sub reveal">Selected public AI projects — from multi-agent systems to evaluation and developer tools. GitHub snapshot: September 11, 2026.</p>
 
   <!-- Featured Project -->
   <div class="featured-project reveal">
     <div class="feat-body">
       <div>
-        <span class="feat-badge">Featured — Live</span>
-        <h3>AI Doc Q&A</h3>
+        <span class="feat-badge">Featured — Experimental / Local-first</span>
+        <h3>Nivesh</h3>
         <p>
-          A production RAG application that lets you upload PDFs and ask questions
-          using Claude 3.5 Sonnet or GPT-4o via OpenRouter. Features TF-IDF semantic
-          search, multi-provider AI support, and a modern chat UI deployed on Vercel.
+          A multi-agent investment research workspace for Indian markets. Independent
+          specialist agents produce source-linked reports, while deterministic risk controls
+          separate research from execution. Includes read-only portfolio sync and an isolated
+          NIFTY paper-trading lab. Experimental, local-first software — live trading is not enabled.
         </p>
       </div>
       <div>
         <div class="proj-tech" style="margin-bottom: 20px;">
-          <span>Python</span><span>FastAPI</span><span>RAG</span>
-          <span>Claude AI</span><span>OpenRouter</span><span>Vercel</span>
+          <span>Next.js</span><span>TypeScript</span><span>Multi-agent AI</span>
+          <span>Pi SDK</span><span>Kite MCP</span><span>Risk controls</span>
         </div>
         <div class="feat-links">
-          <a href="https://ai-doc-qa.vercel.app" target="_blank" rel="noopener" class="btn btn-accent">Live Demo</a>
-          <a href="https://github.com/jitu2611/ai-doc-qa" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+          <a href="https://github.com/jitu2611/nivesh" target="_blank" rel="noopener" class="btn btn-accent">Explore Nivesh ↗</a>
+          <a href="https://github.com/jitu2611/nivesh#architecture" target="_blank" rel="noopener" class="btn btn-ghost">Architecture</a>
         </div>
       </div>
     </div>
-    <div class="feat-visual">&#129302;</div>
+    <div class="feat-visual" aria-hidden="true"><div class="doc-art">NIVESH / AGENT LAB<strong>Think.<br>Verify.</strong><i></i><i></i><i></i><div class="doc-chip">RESEARCH → RISK CHECK ↗</div></div></div>
   </div>
 
   <!-- Projects Grid -->
@@ -845,8 +873,8 @@
   <div class="contact-layout">
     <div class="contact-left reveal">
       <p>
-        I'm always open to discussing new projects, creative ideas, or opportunities
-        to be part of something interesting. Drop me a line.
+        Building an AI product or looking for backend depth? I'm interested in AI engineering,
+        agentic systems, and turning ambitious ideas into usable software. Explore my work and connect through GitHub.
       </p>
       <div class="contact-links">
         <a href="https://github.com/jitu2611" target="_blank" rel="noopener" class="contact-link">
@@ -856,43 +884,35 @@
             <span>github.com/jitu2611</span>
           </div>
         </a>
-        <a href="mailto:jitesh@example.com" class="contact-link">
-          <div class="link-icon">&#9993;</div>
-          <div>
-            <strong>Email</strong>
-            <span>Drop me a line</span>
-          </div>
-        </a>
+
       </div>
     </div>
-    <form class="contact-form reveal reveal-delay-1" onsubmit="handleSubmit(event)">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn btn-accent" style="align-self:flex-start;">Send Message</button>
-    </form>
+    <div class="contact-note" aria-hidden="true">↗</div>
   </div>
 </section>
 
 <footer>
   <span>&#169; 2026 Jitesh &mdash; <a href="https://github.com/jitu2611">@jitu2611</a></span>
-  <span>Built with intention.</span>
+  <span>Built with intention. Always in motion.</span>
+  <button class="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
 </footer>
 
 <script>
 /* ── Typewriter ── */
 (function() {
   const phrases = [
-    'Building AI-Powered Applications',
-    'Shipping RAG Pipelines',
-    'Engineering LLM Agents',
-    'Designing System Architecture',
-    'Building Android Apps',
-    'Writing Clean Code'
+    'Engineering Multi-Agent Systems',
+    'Building RAG Applications',
+    'Evaluating Prompts & Agent Behavior',
+    '8+ Years of Backend Engineering',
+    'Vibe-Coding Expressive Frontends',
+    'Turning AI Ideas into Products'
   ];
   const el = document.getElementById('typewriter');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = phrases[0]; return; }
   let pi = 0, ci = 0, del = false;
   function tick() {
+    if (document.documentElement.classList.contains('motion-off')) { setTimeout(tick, 300); return; }
     const cur = phrases[pi];
     if (del) ci--; else ci++;
     el.innerHTML = cur.substring(0, ci) + '<span class="cursor-blink"></span>';
@@ -952,7 +972,7 @@ document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
 });
 
-/* ── Projects (excluding AI Doc Q&A which is featured) ── */
+/* Public AI projects, reviewed against GitHub READMEs on 2026-09-11. */
 (function() {
   const projects = [
     {
@@ -960,7 +980,7 @@ document.querySelectorAll('.nav-links a').forEach(a => {
       desc: 'Claude AI skill that transforms your Zerodha/Groww portfolio CSV into a Buy/Hold/Avoid report — powered by live news sentiment.',
       url: 'https://github.com/jitu2611/indian-stock-analyst',
       tech: ['Python', 'Claude AI', 'LLM', 'Finance'],
-      icon: '&#128200;',
+      icon: '01 /',
       stars: 3
     },
     {
@@ -968,45 +988,49 @@ document.querySelectorAll('.nav-links a').forEach(a => {
       desc: 'Autonomous AI news agent with multi-model LLM orchestration, custom digital personas, and a premium Rich CLI.',
       url: 'https://github.com/jitu2611/insight-pulse-agent',
       tech: ['Python', 'LLM Agents', 'CLI'],
-      icon: '&#128240;',
+      icon: '02 /',
       stars: 0
     },
     {
-      name: 'Astro-Navigation',
-      desc: 'Full-featured celestial navigation suite with sight reduction, dead reckoning, and interactive 3D globe plotting.',
-      url: 'https://github.com/jitu2611/Astro-Navigation',
-      tech: ['JavaScript', 'Three.js', 'Globe.gl'],
-      icon: '&#127776;',
+      name: 'AgentLens',
+      desc: 'Pre-release workspace for local-first AI coding-agent observability. Planned workflows turn session traces into execution timelines, explainable risk findings, and sanitized audit reports.',
+      url: 'https://github.com/jitu2611/agentlens',
+      tech: ['Pre-release', 'Agent observability', 'Local-first'],
+      icon: '03 /',
       stars: 0
     },
     {
-      name: 'Filmstack',
-      desc: 'Android movie discovery app powered by Firebase with Material Design interface for browsing and saving films.',
-      url: 'https://github.com/jitu2611/Filmstack',
-      tech: ['Java', 'Android', 'Firebase'],
-      icon: '&#127909;',
+      name: 'Prompt Evaluation Platform',
+      desc: 'Local demo for immutable prompt versions, evaluation datasets, and persisted exact-match results. Built with Spring Boot and PostgreSQL; v0.1 uses a deterministic echo provider, not a live LLM.',
+      url: 'https://github.com/jitu2611/prompt-eval-platform',
+      tech: ['Java 21', 'Spring Boot', 'PostgreSQL', 'Evaluations'],
+      icon: '04 /',
       stars: 1
     },
     {
-      name: 'Speed-Dial APK',
-      desc: 'One-touch dial Android app for quickly calling your most-used contacts. Focused on simplicity and speed.',
-      url: 'https://github.com/jitu2611/Speed-Dial-apk',
-      tech: ['Java', 'Android'],
-      icon: '&#128222;',
+      name: 'AI Document Q&A',
+      desc: 'A retrieval-augmented document assistant that extracts PDF text, ranks relevant chunks with TF-IDF, and supplies grounded context to Claude through a FastAPI backend.',
+      url: 'https://github.com/jitu2611/ai-doc-qa',
+      tech: ['Python', 'FastAPI', 'RAG', 'Claude'],
+      icon: '05 /',
       stars: 0
     },
     {
-      name: 'Quick-In',
-      desc: 'Android utility app built for fast, frictionless task entry and organisation.',
-      url: 'https://github.com/jitu2611/Quick-In',
-      tech: ['Java', 'Android'],
-      icon: '&#9889;',
+      name: 'Faahh — Roast to Work',
+      desc: 'An AI-powered desktop focus app that brings personality to productivity, combining Claude-generated roasts with idle detection and focus streaks.',
+      url: 'https://github.com/jitu2611/faahh-roast-to-work',
+      tech: ['Electron', 'JavaScript', 'Claude', 'Productivity'],
+      icon: '06 /',
       stars: 0
     }
   ];
 
+  const priority = ['AgentLens', 'Prompt Evaluation Platform', 'AI Document Q&A', 'Insight Pulse Agent', 'Indian Stock Analyst', 'Faahh — Roast to Work'];
+  projects.sort((a, b) => priority.indexOf(a.name) - priority.indexOf(b.name));
   const grid = document.getElementById('projectsGrid');
   projects.forEach((p, i) => {
+    p.icon = String(i + 1).padStart(2, '0') + ' /';
+    p.stars = 0;
     const card = document.createElement('div');
     card.className = 'proj-card reveal' + (i % 3 !== 0 ? ' reveal-delay-' + (i % 3) : '');
     card.innerHTML =
@@ -1030,20 +1054,7 @@ document.querySelectorAll('.nav-links a').forEach(a => {
   grid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 
-/* ── Contact Form ── */
-function handleSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.textContent = 'Sent!';
-  btn.style.background = '#48bb78';
-  btn.style.color = '#000';
-  setTimeout(() => {
-    btn.textContent = 'Send Message';
-    btn.style.background = '';
-    btn.style.color = '';
-    e.target.reset();
-  }, 2500);
-}
+
 </script>
 </body>
 </html>
