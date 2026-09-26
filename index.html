@@ -1,1060 +1,158 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jitesh | AI Engineering · Backend · Vibe-Coded Frontends</title>
-  <meta name="description" content="Jitesh — 8+ years of backend engineering experience, now building AI agents, RAG applications, evaluation tools, and vibe-coded frontends.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f5f0">
+  <title>Jitesh — Software engineer and problem solver</title>
+  <meta name="description" content="Jitesh is a software engineer with a computer science background and 8+ years of backend experience, exploring practical applications of AI.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:        #060912;
-      --surface:   #0b0f1e;
-      --surface-2: #111627;
-      --border:    #1a2035;
-      --border-2:  #232d47;
-      --text:      #e8eaf2;
-      --muted:     #4d5675;
-      --accent:    #0070f3;
-      --accent-glow: rgba(0,112,243,0.25);
-      --accent-2:  #3b82f6;
-      --accent-3:  #60a5fa;
-      --shadow:    0 16px 64px rgba(0,0,0,0.7);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ── Noise Texture Overlay ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-    }
-
-    /* ── Navigation ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.4s ease;
-    }
-    nav.scrolled {
-      background: rgba(8,8,8,0.92);
-      backdrop-filter: blur(20px);
-      padding: 14px 40px;
-      border-bottom: 1px solid var(--border);
-    }
-    nav.hidden { transform: translateY(-100%); }
-
-    .nav-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-    .hamburger span { width: 22px; height: 1.5px; background: var(--text); transition: 0.3s; }
-
-    /* ── Section Base ── */
-    section {
-      position: relative;
-      z-index: 1;
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 120px 40px;
-    }
-    .section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      max-width: 60px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.4;
-    }
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(36px, 5vw, 56px);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -1.5px;
-      margin-bottom: 16px;
-    }
-    .section-sub {
-      font-size: 16px;
-      color: var(--muted);
-      margin-bottom: 64px;
-      max-width: 480px;
-    }
-
-    /* ── Hero ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 100px;
-      padding-bottom: 60px;
-      overflow: hidden;
-    }
-    .hero-inner {
-      width: 100%;
-      position: relative;
-    }
-    .hero-eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.1s forwards;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: var(--accent);
-    }
-    .hero-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(64px, 11vw, 140px);
-      font-weight: 800;
-      line-height: 0.9;
-      letter-spacing: -4px;
-      margin-bottom: 32px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.25s forwards;
-    }
-    .hero-name .outline {
-      -webkit-text-stroke: 2px rgba(232,234,242,0.25);
-      color: transparent;
-    }
-    .hero-name .accent { color: var(--accent); }
-    .hero-row {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 40px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.4s forwards;
-    }
-    .hero-tagline {
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 440px;
-      line-height: 1.7;
-    }
-    .hero-tagline .highlight {
-      color: var(--text);
-      font-weight: 500;
-    }
-    .typewriter-wrap {
-      font-family: 'Space Mono', monospace;
-      font-size: 14px;
-      color: var(--accent-2);
-      margin-top: 12px;
-    }
-    .cursor-blink {
-      display: inline-block;
-      width: 8px;
-      height: 14px;
-      background: var(--accent-2);
-      vertical-align: text-bottom;
-      animation: blink 1s step-end infinite;
-    }
-    @keyframes blink { 50% { opacity: 0; } }
-    .hero-cta {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      padding: 13px 28px;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.25s ease;
-      letter-spacing: 0.02em;
-    }
-    .btn-accent {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-accent:hover { background: #1a7fff; transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border-2);
-    }
-    .btn-ghost:hover { border-color: var(--muted); transform: translateY(-2px); }
-
-    /* ── Hero Deco Number ── */
-    .hero-deco {
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(180px, 25vw, 340px);
-      font-weight: 800;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.04);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      letter-spacing: -12px;
-    }
-
-    /* ── About ── */
-    #about {
-      border-top: 1px solid var(--border);
-    }
-    .about-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .about-text p {
-      color: var(--muted);
-      font-size: 16px;
-      margin-bottom: 18px;
-      line-height: 1.8;
-    }
-    .about-text p span { color: var(--text); font-weight: 500; }
-    .stats-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .stat-item {
-      background: var(--surface);
-      padding: 28px 24px;
-      transition: background 0.3s;
-    }
-    .stat-item:hover { background: var(--surface-2); }
-    .stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
-      letter-spacing: -2px;
-    }
-    .stat-lbl {
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 6px;
-      font-family: 'Space Mono', monospace;
-    }
-
-    /* ── Skills ── */
-    #skills { border-top: 1px solid var(--border); }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .skill-card {
-      background: var(--surface);
-      padding: 32px 28px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s;
-    }
-    .skill-card:hover { background: var(--surface-2); }
-    .skill-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-    .skill-card:hover::after { transform: scaleX(1); }
-    .skill-icon {
-      font-size: 24px;
-      margin-bottom: 16px;
-      display: block;
-    }
-    .skill-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.3px;
-    }
-    .skill-card p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      padding: 3px 10px;
-      border: 1px solid var(--border-2);
-      border-radius: 3px;
-      color: var(--accent-3);
-    }
-
-    /* ── Projects ── */
-    #projects { border-top: 1px solid var(--border); }
-
-    .featured-project {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      transition: border-color 0.3s;
-    }
-    .featured-project:hover { border-color: var(--accent); }
-    .feat-body {
-      padding: 48px 44px;
-      background: var(--surface);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .feat-badge {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #fff;
-      background: var(--accent);
-      padding: 4px 10px;
-      border-radius: 3px;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-    .feat-body h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
-      line-height: 1.1;
-    }
-    .feat-body p {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.75;
-      margin-bottom: 28px;
-      flex: 1;
-    }
-    .feat-links {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    .feat-visual {
-      background: var(--surface-2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    .feat-visual::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(0,112,243,0.12) 0%, transparent 70%);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .proj-card {
-      background: var(--surface);
-      padding: 28px 26px;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.3s;
-      position: relative;
-    }
-    .proj-card:hover { background: var(--surface-2); }
-    .proj-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 14px;
-    }
-    .proj-icon { font-size: 28px; }
-    .proj-links { display: flex; gap: 10px; align-items: center; }
-    .proj-links a {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      text-decoration: none;
-      padding: 4px 10px;
-      border: 1px solid var(--border-2);
-      border-radius: 3px;
-      transition: all 0.2s;
-    }
-    .proj-links a:hover { color: var(--accent); border-color: var(--accent); }
-    .proj-links a.live { color: var(--accent); border-color: rgba(212,255,0,0.3); }
-    .proj-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.3px;
-    }
-    .proj-card p {
-      font-size: 13px;
-      color: var(--muted);
-      flex: 1;
-      line-height: 1.65;
-      margin-bottom: 16px;
-    }
-    .proj-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
-    .proj-tech span {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      padding: 2px 8px;
-      background: rgba(0,112,243,0.08);
-      border: 1px solid rgba(0,112,243,0.2);
-      border-radius: 3px;
-      color: var(--accent-3);
-    }
-    .stars {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      color: var(--accent-2);
-      margin-top: 10px;
-    }
-
-    /* ── Contact ── */
-    #contact { border-top: 1px solid var(--border); }
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-    .contact-left h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
-    }
-    .contact-left p { color: var(--muted); font-size: 15px; margin-bottom: 36px; line-height: 1.7; }
-    .contact-links { display: flex; flex-direction: column; gap: 12px; }
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      text-decoration: none;
-      transition: all 0.25s;
-      font-size: 14px;
-    }
-    .contact-link:hover { border-color: var(--accent); transform: translateX(6px); }
-    .contact-link .link-icon {
-      width: 38px; height: 38px;
-      background: var(--surface-2);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-    .contact-link strong { display: block; font-size: 14px; }
-    .contact-link span { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      padding: 14px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--text);
-      font-size: 14px;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus { border-color: var(--accent); }
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder { color: var(--muted); }
-    .contact-form textarea { resize: vertical; min-height: 130px; }
-
-    /* ── Footer ── */
-    footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 28px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    footer a { color: var(--accent); text-decoration: none; }
-
-    /* ── Scroll Reveal ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-
-    /* ── Load Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Mobile ── */
-    @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      nav.scrolled { padding: 12px 24px; }
-      .hamburger { display: flex; }
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: rgba(8,8,8,0.98);
-        flex-direction: column;
-        padding: 24px;
-        gap: 20px;
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-links.open { display: flex; }
-      section { padding: 80px 24px; }
-      .about-layout,
-      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
-      .featured-project { grid-template-columns: 1fr; }
-      .feat-visual { min-height: 160px; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .hero-name { letter-spacing: -2px; }
-      .hero-deco { display: none; }
-      footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px; }
-    }
-    @media (max-width: 600px) {
-      .stats-wrap { grid-template-columns: 1fr 1fr; }
-      .feat-body { padding: 32px 28px; }
-      .feat-body h3 { font-size: 24px; }
-    }
-
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
-  </style>
-  <link rel="stylesheet" href="studio.css">
-  <link rel="stylesheet" href="universe.css">
-  <script src="studio.js" defer></script>
-  <script src="universe.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script>
+  <script src="site.js" defer></script>
+  <script type="module" src="orb.js"></script>
 </head>
 <body>
-<div class="scroll-progress" aria-hidden="true"></div>
+  <a class="skip-link" href="#content">Skip to content</a>
 
-<!-- Navigation -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">J.</a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Jitesh, home">Jitesh<span>.</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#experiments">Experiments</a>
+      <a href="https://github.com/jitu2611" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-<!-- Hero -->
-<section id="hero">
-  <div class="hero-inner">
-    <div class="orbital" aria-hidden="true"><div class="orbit"></div><div class="orbit"></div><div class="orbit"></div>
-      <svg class="robot" viewBox="0 0 320 380" fill="none">
-        <defs><linearGradient id="shell" x1="65" y1="80" x2="270" y2="320" gradientUnits="userSpaceOnUse"><stop stop-color="#faf9ed"/><stop offset=".45" stop-color="#b9b8cc"/><stop offset="1" stop-color="#55546b"/></linearGradient><linearGradient id="visor" x2="1" y2="1"><stop stop-color="#101b22"/><stop offset="1" stop-color="#25213c"/></linearGradient></defs>
-        <ellipse cx="160" cy="353" rx="65" ry="9" fill="#d8fa73" opacity=".12"/>
-        <g class="robot-body"><path d="M160 67V40" stroke="#b7a3f5" stroke-width="5"/><circle class="antenna-light" cx="160" cy="32" r="9" fill="#d8fa73"/>
-        <rect x="51" y="113" width="25" height="63" rx="12" fill="#b7a3f5"/><rect x="244" y="113" width="25" height="63" rx="12" fill="#b7a3f5"/>
-        <rect x="67" y="72" width="186" height="146" rx="52" fill="url(#shell)" stroke="#f4f0ff" stroke-width="2"/>
-        <rect x="84" y="99" width="152" height="91" rx="33" fill="url(#visor)" stroke="#77728b"/>
-        <g class="robot-eyes" fill="#d8fa73"><rect x="109" y="123" width="25" height="31" rx="12"/><rect x="186" y="123" width="25" height="31" rx="12"/></g>
-        <path d="M147 168Q160 177 173 168" stroke="#d8fa73" stroke-width="3" stroke-linecap="round"/>
-        <path d="M114 233Q160 215 206 233L218 277Q219 310 160 326Q101 310 102 277Z" fill="url(#shell)" stroke="#ddd9ed" stroke-width="2"/>
-        <circle cx="160" cy="268" r="23" fill="#181e20" stroke="#77728b"/><path class="core-glyph" d="M160 251L170 268L160 285L150 268Z" fill="#d8fa73"/>
-        <path d="M90 240Q60 252 72 284" stroke="#b7a3f5" stroke-width="20" stroke-linecap="round"/><path class="robot-hand" d="M230 242Q266 228 265 198" stroke="#b7a3f5" stroke-width="20" stroke-linecap="round"/>
-        </g>
-      </svg><span class="orbital-label">J / 01 — YOUR FRIENDLY DIGITAL EXPLORER</span></div>
-    <div class="hero-eyebrow">Backend engineer. AI builder. Creative coder.</div>
-    <h1 class="hero-name">
-      Jitesh<span class="accent">.</span><br>
-      <span class="outline">AI meets</span><br>
-      engineering.
-    </h1>
-    <div class="hero-row">
-      <div>
-        <p class="hero-tagline">
-          <span class="highlight">8+ years of backend engineering.</span>
-          Now building agentic AI, RAG applications, and intelligent developer tools —
-          with <span class="highlight">vibe-coded frontends</span> that bring them to life.
-        </p>
-        <div class="typewriter-wrap" id="typewriter"><span class="cursor-blink"></span></div>
-      </div>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-accent">View Projects</a>
-        <a href="https://github.com/jitu2611" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Agentic AI <b>✳</b> Backend engineering <b>✳</b> Vibe-coded frontends <b>✳</b></span><span>Agentic AI <b>✳</b> Backend engineering <b>✳</b> Vibe-coded frontends <b>✳</b></span></div></div>
-
-<section id="universe" aria-labelledby="universe-title">
-  <div class="universe-heading"><div><div class="section-label">Beyond the interface</div><h2 class="section-title" id="universe-title">A little artificial.<br>A lot of possibility.</h2></div><p>An experimental corner of my universe. Explore the signals behind intelligent systems.</p></div>
-  <div class="universe-console" data-mode="neural">
-    <canvas id="neural-space" aria-hidden="true"></canvas>
-    <div class="console-top"><span><i></i> J / 01 · INTERACTIVE SYSTEM</span><span>SIMULATION / NOT LIVE AI</span></div>
-    <div class="core-orb" aria-hidden="true"><div></div><div></div><div></div><span>J<span class="core-dot">.</span></span></div>
-    <div class="console-readout"><span class="readout-label">01 / NEURAL NETWORK</span><h3 id="mode-title">Everything is connected.</h3><p id="mode-description">Individual signals. Shared intelligence. A visual study of the connections that make complex systems possible.</p></div>
-    <div class="mode-controls" role="group" aria-label="Universe visual mode"><button type="button" data-mode="neural" aria-pressed="true">01 Neural</button><button type="button" data-mode="orbit" aria-pressed="false">02 Orbital</button><button type="button" data-mode="signal" aria-pressed="false">03 Signal</button></div>
-    <div class="console-coordinate" aria-hidden="true">EXPLORE THE SPACE<br>MOVE YOUR POINTER ↗</div>
-  </div>
-</section>
-
-<!-- About -->
-<section id="about">
-  <div class="section-label reveal">01 — About</div>
-  <h2 class="section-title reveal">Backend depth.<br>AI-first direction.</h2>
-  <div class="about-layout">
-    <div class="about-text reveal reveal-delay-1">
-      <p>
-        I'm Jitesh — a backend engineer with <span>8+ years of experience</span>.
-        My foundation is server-side engineering: <span>Java, Python, APIs, and system design</span>.
-        My current focus is bringing that engineering discipline to AI-powered products.
-      </p>
-      <p>
-        I'm building across the <span>AI application stack</span>: multi-agent research workflows,
-        retrieval-augmented generation, prompt evaluation, and coding-agent observability.
-        I care about what surrounds the model — <span>clear boundaries, evidence, evaluation, and control</span>.
-      </p>
-      <p>
-        On the frontend, I <span>vibe code with AI</span> to move quickly from an idea to an expressive,
-        usable interface. AI helps accelerate the build; <span>engineering judgment, review, and iteration</span>
-        shape the result. Backend depth, AI-first thinking, and a hands-on product mindset.
-      </p>
-    </div>
-    <div class="stats-wrap reveal reveal-delay-2">
-      <div class="stat-item">
-        <div class="stat-num">AI</div>
-        <div class="stat-lbl">Primary focus</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">8+</div>
-        <div class="stat-lbl">Years in backend</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">0→1</div>
-        <div class="stat-lbl">Product mindset</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">+AI</div>
-        <div class="stat-lbl">Vibe-coded frontend</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Skills -->
-<section id="skills">
-  <div class="section-label reveal">02 — Skills</div>
-  <h2 class="section-title reveal">The AI builder’s stack.</h2>
-  <p class="section-sub reveal">AI at the center. Backend engineering underneath. Expressive interfaces on top.</p>
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <span class="skill-icon">&#9749;</span>
-      <h3>AI & Agentic Systems</h3>
-      <p>Multi-agent research, tool-connected workflows, and retrieval-grounded applications.</p>
-      <div class="tags">
-        <span class="tag">LLM Agents</span><span class="tag">RAG</span>
-        <span class="tag">Claude</span><span class="tag">MCP</span><span class="tag">Pi SDK</span>
-      </div>
-    </div>
-    <div class="skill-card reveal reveal-delay-1">
-      <span class="skill-icon">&#128241;</span>
-      <h3>Backend Engineering</h3>
-      <p>8+ years of experience building server-side software, APIs, and application architecture.</p>
-      <div class="tags">
-        <span class="tag">Java</span><span class="tag">Python</span>
-        <span class="tag">Spring Boot</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span>
-      </div>
-    </div>
-    <div class="skill-card reveal reveal-delay-2">
-      <span class="skill-icon">&#127760;</span>
-      <h3>Vibe-Coded Frontends</h3>
-      <p>AI-assisted prototyping, hands-on refinement, and expressive interfaces for technical products.</p>
-      <div class="tags">
-        <span class="tag">HTML/CSS</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">Next.js</span><span class="tag">TypeScript</span>
-        <span class="tag">AI-assisted development</span>
-      </div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">&#128736;</span>
-      <h3>Engineering Workflow</h3>
-      <p>Version control, local-first development, testing, and repeatable builds.</p>
-      <div class="tags">
-        <span class="tag">Git</span>
-        <span class="tag">GitHub</span>
-        <span class="tag">Prometheus</span>
-        <span class="tag">Linux</span>
-        <span class="tag">Vercel</span>
-      </div>
-    </div>
-    <div class="skill-card reveal reveal-delay-1">
-      <span class="skill-icon">&#129302;</span>
-      <h3>Evaluation & Trust</h3>
-      <p>Prompt versioning and deterministic evaluations, with agent observability as an active area of exploration.</p>
-      <div class="tags">
-        <span class="tag">Prompt evaluation</span><span class="tag">Test datasets</span>
-        <span class="tag">Risk controls</span><span class="tag">Execution traces</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Projects -->
-<section id="projects">
-  <div class="section-label reveal">03 — Projects</div>
-  <h2 class="section-title reveal">Intelligence, built.</h2>
-  <p class="section-sub reveal">Selected public AI projects — from multi-agent systems to evaluation and developer tools. GitHub snapshot: September 11, 2026.</p>
-
-  <!-- Featured Project -->
-  <div class="featured-project reveal">
-    <div class="feat-body">
-      <div>
-        <span class="feat-badge">Featured — Experimental / Local-first</span>
-        <h3>Nivesh</h3>
-        <p>
-          A multi-agent investment research workspace for Indian markets. Independent
-          specialist agents produce source-linked reports, while deterministic risk controls
-          separate research from execution. Includes read-only portfolio sync and an isolated
-          NIFTY paper-trading lab. Experimental, local-first software — live trading is not enabled.
-        </p>
-      </div>
-      <div>
-        <div class="proj-tech" style="margin-bottom: 20px;">
-          <span>Next.js</span><span>TypeScript</span><span>Multi-agent AI</span>
-          <span>Pi SDK</span><span>Kite MCP</span><span>Risk controls</span>
-        </div>
-        <div class="feat-links">
-          <a href="https://github.com/jitu2611/nivesh" target="_blank" rel="noopener" class="btn btn-accent">Explore Nivesh ↗</a>
-          <a href="https://github.com/jitu2611/nivesh#architecture" target="_blank" rel="noopener" class="btn btn-ghost">Architecture</a>
+  <main id="content">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="kicker">Software engineer · Computer science · Bengaluru</p>
+        <h1 id="hero-title">I build software to solve <em>real problems.</em></h1>
+        <p class="hero-intro">I’m Jitesh, a backend engineer with 8+ years of experience. I enjoy understanding difficult problems, designing dependable systems, and exploring where AI can make software more useful.</p>
+        <div class="hero-links">
+          <a class="primary-link" href="#work">See my work <span>↓</span></a>
+          <a href="https://github.com/jitu2611" target="_blank" rel="noopener">Follow on GitHub <span>↗</span></a>
         </div>
       </div>
-    </div>
-    <div class="feat-visual" aria-hidden="true"><div class="doc-art">NIVESH / AGENT LAB<strong>Think.<br>Verify.</strong><i></i><i></i><i></i><div class="doc-chip">RESEARCH → RISK CHECK ↗</div></div></div>
-  </div>
+      <div class="orb-wrap" aria-label="Interactive abstract intelligence model">
+        <canvas id="orb"></canvas>
+        <div class="orb-label"><span><i></i> Interactive model</span><span>Move your pointer</span></div>
+      </div>
+    </section>
 
-  <!-- Projects Grid -->
-  <div class="projects-grid" id="projectsGrid"></div>
-</section>
+    <section class="about section" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <p class="section-index">01 / About</p>
+        <h2 id="about-title">Engineering first.<br>AI where it helps.</h2>
+      </div>
+      <div class="about-content">
+        <p class="lead">My background is in computer science and backend engineering. I’m most comfortable working on the parts of a product that need careful reasoning: architecture, APIs, data, reliability, and the boundaries between systems.</p>
+        <p>I’m now applying that foundation to AI-assisted products and developer tools. I don’t treat AI as the answer to every problem. I’m interested in where it creates genuine leverage—and in building the surrounding software that keeps it understandable, testable, and useful.</p>
+        <p>On the frontend, I use AI-assisted development to move quickly from an idea to a working interface, then refine the result with human judgment. The goal is not more software. It is a clearer solution.</p>
+      </div>
+      <dl class="facts" aria-label="Professional summary">
+        <div><dt>Experience</dt><dd>8+ years</dd></div>
+        <div><dt>Foundation</dt><dd>Backend engineering</dd></div>
+        <div><dt>Current interest</dt><dd>Practical AI</dd></div>
+        <div><dt>Approach</dt><dd>Problem → system → product</dd></div>
+      </dl>
+    </section>
 
-<!-- Contact -->
-<section id="contact">
-  <div class="section-label reveal">04 — Contact</div>
-  <h2 class="section-title reveal">Let's work<br>together.</h2>
-  <div class="contact-layout">
-    <div class="contact-left reveal">
-      <p>
-        Building an AI product or looking for backend depth? I'm interested in AI engineering,
-        agentic systems, and turning ambitious ideas into usable software. Explore my work and connect through GitHub.
-      </p>
-      <div class="contact-links">
-        <a href="https://github.com/jitu2611" target="_blank" rel="noopener" class="contact-link">
-          <div class="link-icon">&#128187;</div>
-          <div>
-            <strong>GitHub</strong>
-            <span>github.com/jitu2611</span>
+    <section class="work section" id="work" aria-labelledby="work-title">
+      <div class="section-heading work-heading">
+        <div><p class="section-index">02 / Selected work</p><h2 id="work-title">Projects and prototypes.</h2></div>
+        <p>Public projects where I explore agents, evaluation, observability, retrieval, and interfaces for complex systems.</p>
+      </div>
+
+      <div class="project-list">
+        <article class="project featured" data-accent="#516b3a">
+          <div class="project-number">01</div>
+          <div class="project-body">
+            <div class="project-meta"><span>Multi-agent systems</span><span>Experimental · Local-first</span></div>
+            <h3><a href="https://github.com/jitu2611/nivesh" target="_blank" rel="noopener">Nivesh <span>↗</span></a></h3>
+            <p>A cautious investment research workspace for Indian markets. Independent agents gather evidence and challenge conclusions, while deterministic controls keep research separate from simulated execution.</p>
+            <ul><li>Next.js</li><li>TypeScript</li><li>Pi SDK</li><li>Kite MCP</li></ul>
           </div>
-        </a>
+          <div class="project-diagram" aria-hidden="true">
+            <span>Evidence</span><i></i><span>Agents</span><i></i><span>Risk check</span>
+          </div>
+        </article>
 
+        <article class="project" data-accent="#755c9f">
+          <div class="project-number">02</div>
+          <div class="project-body">
+            <div class="project-meta"><span>AI evaluation</span><span>v0.1 local demo</span></div>
+            <h3><a href="https://github.com/jitu2611/prompt-eval-platform" target="_blank" rel="noopener">Prompt Evaluation Platform <span>↗</span></a></h3>
+            <p>A reference application for versioning prompts, defining evaluation datasets, running deterministic checks, and examining persisted results. Its current release intentionally uses a local echo provider rather than a live model.</p>
+            <ul><li>Java 21</li><li>Spring Boot</li><li>PostgreSQL</li><li>Evaluation workflows</li></ul>
+          </div>
+        </article>
+
+        <article class="project" data-accent="#39756b">
+          <div class="project-number">03</div>
+          <div class="project-body">
+            <div class="project-meta"><span>Developer tooling</span><span>Pre-release</span></div>
+            <h3><a href="https://github.com/jitu2611/agentlens" target="_blank" rel="noopener">AgentLens <span>↗</span></a></h3>
+            <p>An early-stage, local-first workspace for understanding what an AI coding agent did. The project is exploring execution timelines, explainable risk findings, secret redaction, and audit-ready reports.</p>
+            <ul><li>Agent traces</li><li>Security</li><li>Local-first</li><li>Observability</li></ul>
+          </div>
+        </article>
+
+        <article class="project" data-accent="#9b603e">
+          <div class="project-number">04</div>
+          <div class="project-body">
+            <div class="project-meta"><span>Retrieval</span><span>Live demo</span></div>
+            <h3><a href="https://ai-doc-qa.vercel.app" target="_blank" rel="noopener">AI Document Q&amp;A <span>↗</span></a></h3>
+            <p>A document assistant that extracts text from PDFs, ranks relevant passages, and supplies grounded context to Claude through a FastAPI backend.</p>
+            <ul><li>Python</li><li>FastAPI</li><li>RAG</li><li>Claude</li></ul>
+          </div>
+        </article>
       </div>
-    </div>
-    <div class="contact-note" aria-hidden="true">↗</div>
-  </div>
-</section>
+      <a class="all-work" href="https://github.com/jitu2611?tab=repositories" target="_blank" rel="noopener">View all repositories <span>↗</span></a>
+    </section>
 
-<footer>
-  <span>&#169; 2026 Jitesh &mdash; <a href="https://github.com/jitu2611">@jitu2611</a></span>
-  <span>Built with intention. Always in motion.</span>
-  <button class="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
-</footer>
+    <section class="experiments section" id="experiments" aria-labelledby="experiments-title">
+      <div class="section-heading">
+        <p class="section-index">03 / Experiments</p>
+        <h2 id="experiments-title">Learning by building.</h2>
+      </div>
+      <div class="experiment-list">
+        <a href="https://github.com/jitu2611/insight-pulse-agent" target="_blank" rel="noopener"><span class="experiment-index">01</span><span><strong>InsightPulse</strong><small>Persona-driven news analysis with multiple LLM providers.</small></span><i>↗</i></a>
+        <a href="https://github.com/jitu2611/indian-stock-analyst" target="_blank" rel="noopener"><span class="experiment-index">02</span><span><strong>Indian Stock Analyst</strong><small>A Claude skill for structured portfolio research.</small></span><i>↗</i></a>
+        <a href="https://github.com/jitu2611/faahh-roast-to-work" target="_blank" rel="noopener"><span class="experiment-index">03</span><span><strong>Faahh</strong><small>An AI-powered desktop focus experiment with personality.</small></span><i>↗</i></a>
+        <a href="https://github.com/jitu2611/Astro-Navigation" target="_blank" rel="noopener"><span class="experiment-index">04</span><span><strong>Astro Navigation</strong><small>A celestial-navigation trainer with interactive plotting.</small></span><i>↗</i></a>
+      </div>
+    </section>
 
-<script>
-/* ── Typewriter ── */
-(function() {
-  const phrases = [
-    'Engineering Multi-Agent Systems',
-    'Building RAG Applications',
-    'Evaluating Prompts & Agent Behavior',
-    '8+ Years of Backend Engineering',
-    'Vibe-Coding Expressive Frontends',
-    'Turning AI Ideas into Products'
-  ];
-  const el = document.getElementById('typewriter');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = phrases[0]; return; }
-  let pi = 0, ci = 0, del = false;
-  function tick() {
-    if (document.documentElement.classList.contains('motion-off')) { setTimeout(tick, 300); return; }
-    const cur = phrases[pi];
-    if (del) ci--; else ci++;
-    el.innerHTML = cur.substring(0, ci) + '<span class="cursor-blink"></span>';
-    if (!del && ci === cur.length) { setTimeout(() => { del = true; tick(); }, 2200); return; }
-    if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
-    setTimeout(tick, del ? 35 : 75);
-  }
-  tick();
-})();
+    <section class="thinking section" aria-labelledby="thinking-title">
+      <div class="section-heading">
+        <p class="section-index">04 / Currently exploring</p>
+        <h2 id="thinking-title">Questions I’m thinking about.</h2>
+      </div>
+      <div class="question-list">
+        <p><span>01</span>How should we evaluate an AI feature before trusting it?</p>
+        <p><span>02</span>What belongs to the model, and what belongs to deterministic software?</p>
+        <p><span>03</span>How can agents remain observable, constrained, and understandable?</p>
+        <p><span>04</span>Can AI-assisted development produce software that still feels considered?</p>
+      </div>
+    </section>
 
-/* ── Scroll Reveal ── */
-(function() {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-})();
+    <section class="contact section" id="contact" aria-labelledby="contact-title">
+      <p class="section-index">05 / Connect</p>
+      <h2 id="contact-title">Have an interesting problem?</h2>
+      <p>I’m always interested in thoughtful software, practical AI, and ideas that are worth working through.</p>
+      <a href="https://github.com/jitu2611" target="_blank" rel="noopener">Start with GitHub <span>↗</span></a>
+    </section>
+  </main>
 
-/* ── Counter Animation ── */
-(function() {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target;
-      const target = parseInt(el.dataset.target);
-      let cur = 0;
-      const step = Math.max(1, Math.floor(target / 40));
-      const isPercent = el.closest('.stat-item').querySelector('.stat-lbl').textContent.includes('%');
-      const timer = setInterval(() => {
-        cur = Math.min(cur + step, target);
-        el.textContent = cur + (isPercent ? '%' : '+');
-        if (cur >= target) clearInterval(timer);
-      }, 28);
-      obs.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.stat-num[data-target]').forEach(c => obs.observe(c));
-})();
-
-/* ── Nav Scroll ── */
-(function() {
-  let last = 0;
-  const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    const cur = window.scrollY;
-    if (cur > 80) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
-    if (cur > last && cur > 120) nav.classList.add('hidden'); else nav.classList.remove('hidden');
-    last = cur;
-  });
-})();
-
-/* ── Hamburger ── */
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.getElementById('navLinks').classList.toggle('open');
-});
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
-});
-
-/* Public AI projects, reviewed against GitHub READMEs on 2026-09-11. */
-(function() {
-  const projects = [
-    {
-      name: 'Indian Stock Analyst',
-      desc: 'Claude AI skill that transforms your Zerodha/Groww portfolio CSV into a Buy/Hold/Avoid report — powered by live news sentiment.',
-      url: 'https://github.com/jitu2611/indian-stock-analyst',
-      tech: ['Python', 'Claude AI', 'LLM', 'Finance'],
-      icon: '01 /',
-      stars: 3
-    },
-    {
-      name: 'Insight Pulse Agent',
-      desc: 'Autonomous AI news agent with multi-model LLM orchestration, custom digital personas, and a premium Rich CLI.',
-      url: 'https://github.com/jitu2611/insight-pulse-agent',
-      tech: ['Python', 'LLM Agents', 'CLI'],
-      icon: '02 /',
-      stars: 0
-    },
-    {
-      name: 'AgentLens',
-      desc: 'Pre-release workspace for local-first AI coding-agent observability. Planned workflows turn session traces into execution timelines, explainable risk findings, and sanitized audit reports.',
-      url: 'https://github.com/jitu2611/agentlens',
-      tech: ['Pre-release', 'Agent observability', 'Local-first'],
-      icon: '03 /',
-      stars: 0
-    },
-    {
-      name: 'Prompt Evaluation Platform',
-      desc: 'Local demo for immutable prompt versions, evaluation datasets, and persisted exact-match results. Built with Spring Boot and PostgreSQL; v0.1 uses a deterministic echo provider, not a live LLM.',
-      url: 'https://github.com/jitu2611/prompt-eval-platform',
-      tech: ['Java 21', 'Spring Boot', 'PostgreSQL', 'Evaluations'],
-      icon: '04 /',
-      stars: 1
-    },
-    {
-      name: 'AI Document Q&A',
-      desc: 'A retrieval-augmented document assistant that extracts PDF text, ranks relevant chunks with TF-IDF, and supplies grounded context to Claude through a FastAPI backend.',
-      url: 'https://github.com/jitu2611/ai-doc-qa',
-      tech: ['Python', 'FastAPI', 'RAG', 'Claude'],
-      icon: '05 /',
-      stars: 0
-    },
-    {
-      name: 'Faahh — Roast to Work',
-      desc: 'An AI-powered desktop focus app that brings personality to productivity, combining Claude-generated roasts with idle detection and focus streaks.',
-      url: 'https://github.com/jitu2611/faahh-roast-to-work',
-      tech: ['Electron', 'JavaScript', 'Claude', 'Productivity'],
-      icon: '06 /',
-      stars: 0
-    }
-  ];
-
-  const priority = ['AgentLens', 'Prompt Evaluation Platform', 'AI Document Q&A', 'Insight Pulse Agent', 'Indian Stock Analyst', 'Faahh — Roast to Work'];
-  projects.sort((a, b) => priority.indexOf(a.name) - priority.indexOf(b.name));
-  const grid = document.getElementById('projectsGrid');
-  projects.forEach((p, i) => {
-    p.icon = String(i + 1).padStart(2, '0') + ' /';
-    p.stars = 0;
-    const card = document.createElement('div');
-    card.className = 'proj-card reveal' + (i % 3 !== 0 ? ' reveal-delay-' + (i % 3) : '');
-    card.innerHTML =
-      '<div class="proj-top">' +
-        '<div class="proj-icon">' + p.icon + '</div>' +
-        '<div class="proj-links">' +
-          (p.demo ? '<a href="' + p.demo + '" target="_blank" rel="noopener" class="live">Live</a>' : '') +
-          '<a href="' + p.url + '" target="_blank" rel="noopener">GitHub</a>' +
-        '</div>' +
-      '</div>' +
-      '<h3>' + p.name + '</h3>' +
-      '<p>' + p.desc + '</p>' +
-      '<div class="proj-tech">' + p.tech.map(t => '<span>' + t + '</span>').join('') + '</div>' +
-      (p.stars > 0 ? '<div class="stars">&#9733; ' + p.stars + ' star' + (p.stars > 1 ? 's' : '') + '</div>' : '');
-    grid.appendChild(card);
-  });
-
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  grid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-})();
-
-
-</script>
+  <footer class="site-footer">
+    <span>© 2026 Jitesh</span>
+    <span>Built with curiosity and careful iteration.</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
 </body>
 </html>
