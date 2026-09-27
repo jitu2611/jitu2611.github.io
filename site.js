@@ -6,7 +6,7 @@ projects.forEach(project => {
   project.addEventListener('pointerleave', () => window.dispatchEvent(new CustomEvent('orb-accent', { detail: '#516b3a' })));
 });
 
-const revealTargets = document.querySelectorAll('.section-heading, .about-content, .facts, .project, .experiment-list > a, .question-list > p, .contact > *');
+const revealTargets = document.querySelectorAll('.section-heading, .about-content, .facts, .experience-list > article, .project, .experiment-list > a, .question-list > p, .contact > *');
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
   revealTargets.forEach(element => element.classList.add('visible'));
 } else {
