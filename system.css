@@ -1,0 +1,24 @@
+.system{width:100%;max-width:420px;justify-self:end;margin:0;color:var(--muted)}
+.system-heading,.system-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;font:10px/1.5 var(--mono)}
+.system-heading{padding-bottom:17px;border-bottom:1px solid var(--line)}
+.system-heading span:last-child{white-space:nowrap;color:var(--accent)}
+.system-map{position:relative;width:100%;aspect-ratio:400/380;margin:16px 0}
+.system-map svg{display:block;width:100%;height:100%;overflow:visible}
+.system-route,.system-guide{stroke:var(--line);stroke-width:1.5}
+.system-arrow{stroke:var(--accent);stroke-width:1.2}
+.system-map svg text{fill:var(--muted);font:11px var(--mono)}
+.system-packet{fill:var(--accent);opacity:0}
+.system-node{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:35%;height:21%;padding:12px;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:8px;color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s}
+.system-node:hover,.system-node:focus-visible,.system-node.is-active{border-color:var(--accent);background:#eef1e7}
+.node-index{display:block;font:9px/1.5 var(--mono);color:var(--muted);white-space:nowrap}
+.system-node strong{display:block;margin-top:4px;font-size:14px;font-weight:500;letter-spacing:-.025em}
+.node-symbol{position:absolute;right:12px;bottom:12px;color:var(--accent);font:16px/1 var(--mono)}
+.system figcaption{border-top:1px solid var(--line);padding-top:17px}
+#system-detail{min-height:3.3em;font-size:12px;line-height:1.65;max-width:36ch}
+.system-footer{margin-top:16px;font-size:9px}
+.system-toggle{border:0;border-bottom:1px solid var(--line);padding:3px 0;background:transparent;color:var(--muted);font:inherit;cursor:pointer}
+.system-toggle:hover{color:var(--accent)}
+.system-toggle[hidden]{display:none}
+@media(max-width:900px) and (min-width:681px){.system-node{padding:9px}.node-index{font-size:8px}.node-symbol{right:8px;bottom:10px;font-size:13px}.system-node strong{font-size:12px}.system-heading{font-size:9px}}
+@media(max-width:680px){.system{max-width:400px;margin:65px auto 0}.system-node{padding:12px}}
+@media(prefers-reduced-motion:reduce){.system-node{transition:none}}

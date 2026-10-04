@@ -2,8 +2,6 @@ const projects = [...document.querySelectorAll('.project')];
 projects.forEach(project => {
   const accent = project.dataset.accent || '#516b3a';
   project.style.setProperty('--project-accent', accent);
-  project.addEventListener('pointerenter', () => window.dispatchEvent(new CustomEvent('orb-accent', { detail: accent })));
-  project.addEventListener('pointerleave', () => window.dispatchEvent(new CustomEvent('orb-accent', { detail: '#516b3a' })));
 });
 
 const revealTargets = document.querySelectorAll('.section-heading, .about-content, .facts, .experience-list > article, .project, .experiment-list > a, .question-list > p, .contact > *');
@@ -23,7 +21,3 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('Intersec
     observer.observe(element);
   });
 }
-
-setTimeout(() => {
-  if (!document.documentElement.dataset.orbReady) document.documentElement.classList.add('no-webgl');
-}, 2500);

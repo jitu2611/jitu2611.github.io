@@ -10,9 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css">
-  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script>
+  <link rel="stylesheet" href="system.css">
+  <script src="vendor/anime.min.js" defer></script>
   <script src="site.js" defer></script>
-  <script type="module" src="orb.js"></script>
+  <script src="system.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
@@ -39,10 +40,31 @@
           <a href="https://github.com/jitu2611" target="_blank" rel="noopener">Follow on GitHub <span>↗</span></a>
         </div>
       </div>
-      <div class="orb-wrap" aria-label="Interactive abstract intelligence model">
-        <canvas id="orb"></canvas>
-        <div class="orb-label"><span><i></i> Interactive model</span><span>Move your pointer</span></div>
-      </div>
+      <figure class="system" aria-labelledby="system-title">
+        <div class="system-heading"><span id="system-title">Anatomy of a reliable system</span><span aria-hidden="true">01 — 05</span></div>
+        <div class="system-map">
+          <svg viewBox="0 0 400 380" fill="none" aria-hidden="true">
+            <path class="system-route" d="M90 65 H310 V190 V315 H90"/>
+            <path class="system-guide" d="M90 277 V118" stroke-dasharray="3 7"/>
+            <path class="system-arrow" d="m194 61 5 4-5 4 M306 127l4 5 4-5 M306 251l4 5 4-5 M206 311l-5 4 5 4"/>
+            <text x="200" y="48" text-anchor="middle">HTTPS</text>
+            <text x="285" y="130" text-anchor="end">enqueue</text>
+            <text x="285" y="255" text-anchor="end">consume</text>
+            <text x="200" y="344" text-anchor="middle">persist</text>
+            <text x="76" y="196" text-anchor="middle" transform="rotate(-90 76 196)">observable at every step</text>
+            <circle class="system-packet" r="4" cx="90" cy="65"/>
+          </svg>
+          <button class="system-node" style="--x:22.5%;--y:17.105%" data-detail="Request · Every useful system starts with a real problem." aria-describedby="system-detail"><span class="node-index">01 / input</span><strong>Request</strong><span class="node-symbol" aria-hidden="true">↗</span></button>
+          <button class="system-node" style="--x:77.5%;--y:17.105%" data-detail="API · Validate inputs. Keep contracts clear." aria-describedby="system-detail"><span class="node-index">02 / boundary</span><strong>API</strong><span class="node-symbol" aria-hidden="true">{ }</span></button>
+          <button class="system-node" style="--x:77.5%;--y:50%" data-detail="Queue · Absorb bursts. Decouple work from requests." aria-describedby="system-detail"><span class="node-index">03 / buffer</span><strong>Queue</strong><span class="node-symbol" aria-hidden="true">≡</span></button>
+          <button class="system-node" style="--x:77.5%;--y:82.895%" data-detail="Worker · Retry safely. Make operations idempotent." aria-describedby="system-detail"><span class="node-index">04 / compute</span><strong>Worker</strong><span class="node-symbol" aria-hidden="true">λ</span></button>
+          <button class="system-node" style="--x:22.5%;--y:82.895%" data-detail="Database · Preserve integrity. Make state durable." aria-describedby="system-detail"><span class="node-index">05 / state</span><strong>Database</strong><span class="node-symbol" aria-hidden="true">⊞</span></button>
+        </div>
+        <figcaption>
+          <p id="system-detail" aria-live="polite">Small pieces. Clear boundaries. Dependable software.</p>
+          <div class="system-footer"><span>Explore each component</span><button class="system-toggle" type="button" hidden>Pause animation</button></div>
+        </figcaption>
+      </figure>
     </section>
 
     <section class="about section" id="about" aria-labelledby="about-title">
